@@ -26,7 +26,10 @@ Do not provide extra conversational filler. Only output files and their contents
 
 def generate_project(prompt: str, chat_history: list = None) -> list[dict]:
     """Calls Gemini and parses the markdown into a list of file dictionaries: [{'path': '...', 'content': '...'}]"""
-    client = genai.Client(api_key="AIzaSyB5cYenhdXq1KHAletbGXLUNFh3Mq42Uvg")
+    api_key = os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        raise ValueError("GEMINI_API_KEY environment variable not set")
+    client = genai.Client(api_key=api_key)
     
     # Format history for genai SDK
     contents = []

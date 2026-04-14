@@ -3,7 +3,9 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
 from ai_service import generate_project
 from sandbox import SandboxManager
 
