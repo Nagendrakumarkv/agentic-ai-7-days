@@ -118,3 +118,78 @@ Patel, let me know when the report is generated or if you hit any install bugs. 
 
 Day 2: Prompt Contracts & Reverse Prompting
 
+Excellent, Patel. Day 1 was about the "How" (the loop); Day 2 is about the "What"—ensuring the agent never starts a task without a crystal-clear technical specification.
+
+As a developer with 5+ years of experience, you know that a vague Jira ticket leads to wasted sprints. Prompt Contracts and Reverse Prompting turn your agent into a senior engineer who clarifies requirements before writing a single line of code.
+
+Step 1: Update Your Memory (claude.md or gemini.md)
+We need to "hardcode" this behavior so the agent doesn't skip the planning phase. Add this to your rules file:
+
+Markdown
+## Interaction Protocol: The Strategy
+1. **Reverse Prompting:** Before starting any non-trivial research or coding task, stop and ask me exactly 5 clarifying questions to define the scope.
+2. **The Contract:** After I answer, generate a "Prompt Contract" with the following sections: 
+   - **Goal:** The final objective.
+   - **Constraints:** Technical or stylistic limits.
+   - **Definition of Done:** 3-5 bullet points that must be true for the task to be finished.
+3. Wait for my "Approved" before executing the task.
+Step 2: Build the "Brief Generator" Skill
+If you are using Claude Code, create a file at .claude/skills/brief-generator.md. If using Antigravity, create a skills folder in your project root and add brief-generator.md.
+
+Paste this into the file:
+
+Markdown
+---
+name: brief-generator
+description: Use this skill to define technical requirements before research.
+---
+# Brief Generator Skill
+When this skill is triggered, you must:
+1. Analyze the user's high-level request.
+2. Output a table showing "What we know" vs "What we need to clarify."
+3. Ask 5 targeted questions to build a technical brief.
+Step 3: The Exercise (Reverse Prompting in Action)
+Now, give your agent a vague, "bad" prompt and watch it fix it.
+
+The Prompt:
+
+"I want to build a feature similar to Vercel's 'v0' but for backend API generation using FastAPI. Use the brief-generator skill to start."
+
+What should happen:
+The Halt: Instead of searching the web, the agent should stop.
+
+The 5 Questions: It should ask you things like:
+
+"Should the generated code include database migrations (Alembic)?"
+
+"Do you want it to prioritize Pydantic v2 schemas or v1?"
+
+"Should it include Dockerfile generation by default?"
+
+"Is there a specific authentication provider (OAuth2/JWT) to assume?"
+
+"Do you want the agent to write unit tests for the generated code?"
+
+Step 4: The Output (The Contract)
+Once you answer those 5 questions (you can just make up brief answers or say "yes to all"), the agent must output a Prompt Contract.
+
+Example Output to look for:
+
+Prompt Contract: FastAPI AI Generator
+Goal: Build a CLI tool that generates FastAPI boilerplate from a text prompt.
+Constraints: Must use Python 3.12, PostgreSQL, and JWT Auth.
+Definition of Done:
+
+CLI accepts a string prompt.
+
+Generates a folder with main.py, models.py, and requirements.txt.
+
+Code passes a ruff linting check.
+
+Patel, give that prompt a shot. Once your agent forces you to answer those questions and presents a contract, you've successfully eliminated "vague prompting" from your workflow.
+
+Let me know when the Contract is generated!
+
+-----------------------------------------------------------------------
+
+Day 3: Video-to-Action Pipeline
