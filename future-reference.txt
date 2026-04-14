@@ -1,0 +1,120 @@
+Since you have over five years of experience as a developer and are already familiar with the AI/ML landscape, we can skip the "what is an LLM" basics and go straight to building an Agentic Workflow.
+
+Here is a 7-day intensive plan to master these concepts using a practical project: Building an Automated Competitive Intelligence Agent.
+
+The Project: "Competitor Watchdog"Goal: An agent that watches a competitor's YouTube channel, extracts their new features, and writes a technical implementation brief for your own team.
+
+Day 1: Setup & The Core Loop
+Goal: Master the Observe-Think-Act cycle.
+Practical Task: Install Claude Code or use the Gemini API in a local environment.
+Exercise: Create a gemini.md (or claude.md) file. Inside, define a "Learned Rules" section.
+Challenge: Prompt the agent to "Research the latest feature of [Competitor Name]." Watch it use the browser tool to Observe, reason about the navigation (Think), and extract the data (Act).
+
+Day 2: Prompt Contracts & Reverse Prompting
+Goal: Elimination of "Vague Prompting" through developer-style specs.
+Practical Task: Build a "Brief Generator" skill.
+Exercise: Before the agent researches, it must use Reverse Prompting to ask you 5 questions (e.g., "Which specific competitors?", "Should I focus on UI or Backend?").
+Output: The agent must generate a Prompt Contract that lists the exact "Definition of Done" before it starts the research.
+
+Day 3: Video-to-Action Pipeline
+Goal: Extracting logic from multimodal data.
+Practical Task: Use the Gemini 1.5 Pro (via Anti-gravity or API) for its long context and video support.
+Exercise: Feed a 10-minute product demo video from a competitor into the agent.
+Challenge: Have the agent extract a step-by-step technical architecture of the feature shown in the video and save it as architecture_spec.json.
+
+Day 4: Multi-Agent Orchestration (The Router)
+Goal: Using the right tool for the job (The 60/30/10 Rule).
+Practical Task: Set up a "Manager" agent.Exercise: * Manager (Claude): Reads the architecture_spec.json.Worker A (Gemini): Drafts the Frontend React components (utilizing Gemini's design strength).Worker B (Codex/GPT): Drafts the FastAPI/PostgreSQL backend logic.
+Challenge: The Manager must coordinate these two workers to ensure the types/interfaces match.
+
+Day 5: Stochastic Multi-Agent Consensus
+Goal: Using statistical spread to find the best approach.
+Practical Task: Solving a "hard" logic problem.
+Exercise: Take a complex backend bottleneck found in Day 4. Spawn 5 sub-agents with different personalities (e.g., "Performance Expert," "Security Specialist").
+Challenge: Each agent proposes a fix. The Manager agent must find the Consensus (the fix most of them agree on) and the Outliers (creative but risky ideas).
+
+Day 6: Sub-Agent Verification Loops
+Goal: Peer-review for AI.
+Practical Task: Automated QA.
+Exercise: Take the code generated on Day 4. Pass it to a Reviewer Agent with a "Fresh Context" (it doesn't see the original prompt).
+Challenge: The Reviewer must find 3 potential bugs. A Resolver Agent then takes those bugs and fixes them. This "Implementer -> Reviewer -> Resolver" loop is how you get production-grade AI code.
+
+Day 7: Context & Cost Management (The Iceberg)
+Goal: Efficiency and scale.
+Practical Task: Refactoring your "Watchdog" for production.
+Exercise: Implement the Iceberg Technique. Instead of sending the whole competitor research history in every prompt, teach the agent to use grep or read to pull only the specific JSON spec it needs for the current task.
+Challenge: Measure the token usage before and after. You should see a $40$–$60\%$ drop in cost.
+
+----------------------------------------------------------------------------
+
+Day 1: Setup & The Core Loop
+
+Great to see you’re diving in, Patel! Since you're a seasoned developer, we’ll move fast.
+
+For Day 1, we are focusing on The Core Loop using Claude Code (the terminal-based agent) or Antigravity (Google’s agentic IDE).
+
+Step 1: Installation & Setup
+Pick the platform that fits your current workflow.
+
+Option A: Claude Code (Terminal Agent)
+If you want to stay in your existing terminal/IDE:
+
+macOS/Linux/WSL: ```bash
+curl -fsSL https://claude.ai/install.sh | bash
+
+Windows (PowerShell): ```powershell
+irm https://claude.ai/install.ps1 | iex
+
+Login: Type claude and follow the OAuth prompt to link your account.
+
+Option B: Antigravity (Agentic IDE)
+If you want a dedicated environment with visual browser feedback:
+
+Download: Search for the "Google Antigravity" installer for your OS.
+
+Launch: Open the app and log in with your Google account. It will set up a local .gemini directory automatically.
+
+Step 2: Create Your "Memory" File
+The agent needs a place to store what it learns about you so it doesn't repeat mistakes.
+
+Create a file in your project root called gemini.md (for Antigravity) or claude.md (for Claude Code).
+
+Paste the following structure:
+
+Markdown
+# Agent Personality & Rules
+You are an expert developer assistant. 
+
+## Learned Rules
+1. Refer to me as "Patel".
+2. When performing research, always provide a summary of the source reliability.
+3. [The agent will add more rules here automatically...]
+
+## Workflow Instructions
+Before starting any research task, write out your "Observe" notes first.
+Step 3: The Challenge (Competitor Research)
+Now, let’s trigger the Observe-Think-Act loop. We'll use a real-world tech competitor example (e.g., Vercel or Supabase).
+
+The Prompt:
+
+"Patel here. I need you to research the latest feature released by Vercel (or a competitor of your choice) in the last 30 days.
+
+Observe: Browse their official blog or changelog.
+
+Think: Reason about how this feature impacts their developer experience.
+
+Act: Extract the core technical requirements and save them to a new file called competitor_feature.md."
+
+What to watch for:
+Observe: You should see the agent calling a tool like browser_open or web_search.
+
+Think: In the terminal or sidebar, look for the "Thinking" block where it says: "I need to find the blog section... I see a post about 'Vercel Ship'... This looks like the main feature."
+
+Act: It will execute write_file to create your report.
+
+Patel, let me know when the report is generated or if you hit any install bugs. Once you see the agent "Thinking" in real-time, you've officially mastered the loop. Ready to move to Day 2: Contracts?
+
+-------------------------------------------------------------
+
+Day 2: Prompt Contracts & Reverse Prompting
+

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v0 for Backend</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Left Pane: Chat -->
+        <div class="chat-pane">
+            <div class="chat-header">
+                <h2>v0 Backend</h2>
+            </div>
+            <div class="chat-history" id="chat-history">
+                <div class="message system-msg">
+                    Welcome to v0 for Backend. Describe the FastAPI project you want to build.
+                </div>
+            </div>
+            <div class="chat-input-container">
+                <textarea id="prompt-input" placeholder="Generate a FastAPI project for a blog..."></textarea>
+                <button id="generate-btn">Generate</button>
+            </div>
+        </div>
+
+        <!-- Right Pane: Viewer -->
+        <div class="viewer-pane">
+            <div class="tabs">
+                <button class="tab-btn active" data-target="code-view">Code</button>
+                <button class="tab-btn" data-target="preview-view">Preview (Swagger UI)</button>
+            </div>
+            
+            <div class="tab-content active" id="code-view">
+                <div class="file-browser" id="file-browser">
+                    <!-- File tree goes here -->
+                </div>
+                <div class="code-editor">
+                    <pre><code id="code-content">Select a file to view its content</code></pre>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="preview-view">
+                <iframe id="preview-frame" src="about:blank"></iframe>
+            </div>
+        </div>
+    </div>
+    <script src="/static/app.js"></script>
+</body>
+</html>
